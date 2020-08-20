@@ -1,7 +1,7 @@
-# Silk2Audio
+# 📽Silk2Audio
 `silk转wav,mp3的go实现`
 
- ## 感恩 [silk-v3-decoder](https://github.com/kn007/silk-v3-decoder)提供的silk转码
+ ## 感恩 😘 [silk-v3-decoder](https://github.com/kn007/silk-v3-decoder)提供的silk转码
 
 
 > ### 工作流程
