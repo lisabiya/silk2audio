@@ -1,4 +1,4 @@
-package main
+package silk
 
 /*
 #cgo LDFLAGS: -L . -lSKP_SILK_SDK
@@ -21,11 +21,6 @@ import (
 	"strings"
 	"unsafe"
 )
-
-func main() {
-	fmt.Printf("version 1.0")
-	TransSilkToWav("2020_08_20_12_15_38_829.silk")
-}
 
 func TransSilkToWav(inputPath string) string {
 	var outputPath = strings.Replace(inputPath, ".silk", ".pcm", -1)
@@ -58,7 +53,7 @@ func transPcmToAudio(inputPath, OutputPath string) {
 		AudioCodec:    &audioCodec,
 	}
 	ffmpegConf := &ffmpeg.Config{
-		FfmpegBinPath: "ffmpeg",
+		FfmpegBinPath: "silk/ffmpeg",
 	}
 	progress, err := ffmpeg.
 		New(ffmpegConf).
