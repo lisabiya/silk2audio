@@ -16,7 +16,6 @@ import "C"
 import (
 	"fmt"
 	"os"
-	"reflect"
 	"silk2audio/transcoder/ffmpeg"
 	"strings"
 	"unsafe"
@@ -28,8 +27,7 @@ func TransSilkToWav(inputPath string) string {
 
 	inputPathC := C.CString(inputPath)
 	outPathC := C.CString(outputPath)
-	var s = C.Decoder(inputPathC, outPathC) //调用C函数
-	fmt.Println(s)
+	var _ = C.Decoder(inputPathC, outPathC) //调用C函数
 	C.free(unsafe.Pointer(inputPathC))
 	C.free(unsafe.Pointer(outPathC))
 	//ffmpeg pcm转码音频
@@ -44,7 +42,7 @@ func transPcmToAudio(inputPath, OutputPath string) {
 	overwrite := true
 	audioCodec := "pcm_s16le"
 	audioChannels := 2
-	audioRate := 16000
+	audioRate := 12000
 	opts := ffmpeg.Options{
 		Overwrite:     &overwrite,
 		OutputFormat:  &format,
@@ -55,7 +53,7 @@ func transPcmToAudio(inputPath, OutputPath string) {
 	ffmpegConf := &ffmpeg.Config{
 		FfmpegBinPath: "silk/ffmpeg",
 	}
-	progress, err := ffmpeg.
+	_, err := ffmpeg.
 		New(ffmpegConf).
 		Input(inputPath).
 		Output(OutputPath).
@@ -64,7 +62,7 @@ func transPcmToAudio(inputPath, OutputPath string) {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Println(reflect.TypeOf(progress))
+		fmt.Println(OutputPath)
 	}
 }
 

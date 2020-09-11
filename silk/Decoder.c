@@ -141,7 +141,7 @@ int Decoder(char* inputPath,char* outPath)
 //    }
 
     /* default settings */
-    quiet     = 0;
+    quiet     = 1;
     loss_prob = 0.0f;
 
     /* get arguments */
@@ -184,7 +184,7 @@ int Decoder(char* inputPath,char* outPath)
     /* Check Silk header */
     {
         char header_buf[ 50 ];
-        fread(header_buf, sizeof(char), 1, bitInFile);
+       counter = fread(header_buf, sizeof(char), 1, bitInFile);
         header_buf[ strlen( "" ) ] = '\0'; /* Terminate with a null character */
         if( strcmp( header_buf, "" ) != 0 ) {
            counter = fread( header_buf, sizeof( char ), strlen( "!SILK_V3" ), bitInFile );
